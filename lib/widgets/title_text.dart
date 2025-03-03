@@ -18,7 +18,7 @@ class TitleTextWidget extends StatelessWidget {
       label,
       style: TextStyle(
         color: color,
-        fontSize: 14,
+        fontSize: fontSize,
       ),
     );
   }
