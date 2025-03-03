@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:soko_user/widgets/custom_list_tile.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
+import '../providers/theme_provider.dart';
 import '../services/asset_manager.dart';
 import '../widgets/subtitle_text.dart';
 
@@ -9,6 +13,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -70,12 +75,57 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(14.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Divider(thickness: 1),
+                const SizedBox(height: 10),
                 const TitleTextWidget(label: "General"),
+                const SizedBox(height: 10),
+                CustomListTile(
+                  imagePath: AssetManager.orderSvg,
+                  text: "All Order",
+                  function: () {},
+                ),
+                CustomListTile(
+                  imagePath: AssetManager.wishlistSvg,
+                  text: "Wishlist",
+                  function: () {},
+                ),
+                CustomListTile(
+                  imagePath: AssetManager.recent,
+                  text: "Viewed Recently",
+                  function: () {},
+                ),
+                CustomListTile(
+                  imagePath: AssetManager.address,
+                  text: "Address",
+                  function: () {},
+                ),
+                const SizedBox(height: 10),
+                const Divider(thickness: 1),
+                const SizedBox(height: 10),
+                const TitleTextWidget(label: "Settings"),
+                const SizedBox(height: 10),
+                SwitchListTile(
+                  secondary: Image.asset(AssetManager.theme, height: 34),
+                  title: Text(
+                    themeProvider.getIsDarkTheme ? "Dark Mode" : "Light Mode",
+                  ),
+                  value: themeProvider.getIsDarkTheme,
+                  onChanged: (value) {
+                    themeProvider.setDarkTheme(value);
+                  },
+                ),
               ],
             ),
           ),
-
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.login),
+              label: Text("Login"),
+            ),
+          ),
         ],
       ),
     );
