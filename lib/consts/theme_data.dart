@@ -8,9 +8,9 @@ class Styles {
       scaffoldBackgroundColor: isDarkTheme
           ? AppColors.darkScaffoldColor
           : AppColors.lightScaffoldColor,
-      cardColor: isDarkTheme
-          ? AppColors.darkCardColor
-          : AppColors.lightCardColor,
+      cardColor:
+          isDarkTheme ? AppColors.darkCardColor : AppColors.lightCardColor,
+      brightness: isDarkTheme ? Brightness.dark : Brightness.light,
     );
   }
 }
