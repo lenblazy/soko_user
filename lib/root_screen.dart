@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:soko_user/screens/cart_screen.dart';
+import 'package:soko_user/screens/cart/cart_screen.dart';
 import 'package:soko_user/screens/home_screen.dart';
 import 'package:soko_user/screens/profile_screen.dart';
 import 'package:soko_user/screens/search_screen.dart';
