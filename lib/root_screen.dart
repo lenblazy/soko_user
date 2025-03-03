@@ -19,7 +19,6 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     screens = [
       HomeScreen(),
@@ -40,7 +39,7 @@ class _RootScreenState extends State<RootScreen> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentScreen,
-        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 10,
         height: kBottomNavigationBarHeight,
         onDestinationSelected: (index) {
