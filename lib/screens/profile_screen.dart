@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/custom_list_tile.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
@@ -20,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(AssetManager.shoppingBasket),
         ),
-        title: Text("Profile screen"),
+        title: AppNameTextWidget(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
