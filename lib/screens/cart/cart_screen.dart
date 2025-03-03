@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soko_user/screens/cart/bottom_checkout.dart';
 import 'package:soko_user/services/asset_manager.dart';
 import 'package:soko_user/widgets/empty_bag.dart';
 import 'package:soko_user/widgets/title_text.dart';
@@ -36,6 +37,7 @@ class CartScreen extends StatelessWidget {
                 ),
               ],
             ),
+            bottomSheet: CartBottomSheetWidget(),
             body: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
