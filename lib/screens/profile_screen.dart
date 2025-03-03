@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../services/asset_manager.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -9,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset("assets/images/bag/shopping_cart.png"),
+          child: Image.asset(AssetManager.shoppingBasket),
         ),
         title: Text("Profile screen"),
       ),
