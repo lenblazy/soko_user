@@ -1,13 +1,68 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class SearchScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:soko_user/services/asset_manager.dart';
+
+import '../widgets/title_text.dart';
+
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Search Screen"),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(AssetManager.shoppingBasket),
+          ),
+          title: const TitleTextWidget(label: "Search products"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      controller.clear();
+                    });
+                    FocusScope.of(context).unfocus();
+                  },
+                  child: Icon(Icons.clear),
+                ),
+              ),
+              onSubmitted: (value) {
+                debugPrint("Value of text $value");
+                debugPrint("Value of conteoller text ${controller.text}");
+              },
+            ),
+          ]),
+        ),
       ),
     );
   }

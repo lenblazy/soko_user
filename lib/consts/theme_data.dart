@@ -22,6 +22,40 @@ class Styles {
           color: isDarkTheme ? Colors.white : Colors.black,
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: isDarkTheme
+            ? AppColors.darkScaffoldColor
+            : AppColors.lightScaffoldColor,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: isDarkTheme ? Colors.white : Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: isDarkTheme ? Colors.white : Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2,
+            color: Theme.of(context).colorScheme.error,
+          ),
+          borderRadius: BorderRadius.circular(18),
+        ),
+      ),
     );
   }
 }
