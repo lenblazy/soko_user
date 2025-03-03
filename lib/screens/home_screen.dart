@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../consts/app_colors.dart';
 import '../providers/theme_provider.dart';
+import '../widgets/subtitle_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,13 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Hello World",
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            const SubtitleTextWidget(label: "Hello world"),
             ElevatedButton(
               onPressed: () {},
               child: Text("Hello world"),
