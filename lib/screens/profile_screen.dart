@@ -5,7 +5,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset("assets/images/bag/shopping_cart.png"),
+        ),
+        title: Text("Profile screen"),
+      ),
       body: Center(
         child: Text("Profile Screen"),
       ),
