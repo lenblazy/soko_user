@@ -1,50 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/consts/validator.dart';
-import 'package:soko_user/screens/auth/register_screen.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/auth/google_btn.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+  static const String routeName = "/registerScreen";
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  late final TextEditingController emailController;
-  late final TextEditingController passwordController;
+class _RegisterScreenState extends State<RegisterScreen> {
+  late final TextEditingController _emailController,
+      _passwordController,
+      _nameController,
+      _repeatPwdController;
 
-  late final FocusNode emailFocusNode;
-  late final FocusNode passwordFocusNode;
+  late final FocusNode _emailFocusNode,
+      _passwordFocusNode,
+      _nameFocusNode,
+      _repeatPwdFocusNode;
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    emailFocusNode = FocusNode();
-    passwordFocusNode = FocusNode();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _nameController = TextEditingController();
+    _repeatPwdController = TextEditingController();
+
+    _nameFocusNode = FocusNode();
+    _repeatPwdFocusNode = FocusNode();
+    _emailFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     if (mounted) {
-      emailController.dispose();
-      passwordController.dispose();
-      emailFocusNode.dispose();
-      passwordFocusNode.dispose();
+      _emailController.dispose();
+      _passwordController.dispose();
+      _nameController.dispose();
+      _repeatPwdController.dispose();
+
+      _emailFocusNode.dispose();
+      _passwordFocusNode.dispose();
+      _nameFocusNode.dispose();
+      _repeatPwdFocusNode.dispose();
     }
 
     super.dispose();
   }
 
-  Future<void> _loginFct() async {
+  Future<void> _registerFct() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
   }
@@ -54,16 +68,16 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(height: 60),
-            const AppNameTextWidget(),
-            const SizedBox(height: 16),
-            Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
+              const AppNameTextWidget(),
+              const SizedBox(height: 16),
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -72,10 +86,24 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.centerLeft,
                           child: TitleTextWidget(label: "Welcome Back"),
                         ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _nameController,
+                          focusNode: _nameFocusNode,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            hintText: "Name",
+                            prefixIcon: Icon(IconlyLight.user2),
+                          ),
+                          validator: (value) {
+                            return Validator.nameValidator(value);
+                          },
+                        ),
                         const SizedBox(height: 10),
                         TextFormField(
-                          controller: emailController,
-                          focusNode: emailFocusNode,
+                          controller: _emailController,
+                          focusNode: _emailFocusNode,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -88,41 +116,43 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 10),
                         TextFormField(
-                          controller: passwordController,
-                          focusNode: passwordFocusNode,
-                          textInputAction: TextInputAction.done,
+                          controller: _passwordController,
+                          focusNode: _passwordFocusNode,
+                          textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                             hintText: "Password",
                             prefixIcon: Icon(IconlyLight.lock),
                           ),
+                          validator: (value) {
+                            return Validator.passwordValidator(value);
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          controller: _repeatPwdController,
+                          focusNode: _repeatPwdFocusNode,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                            hintText: "Repeat Password",
+                            prefixIcon: Icon(IconlyLight.lock),
+                          ),
                           onFieldSubmitted: (value) async {
-                            await _loginFct();
+                            await _registerFct();
                           },
                           validator: (value) {
                             return Validator.passwordValidator(value);
                           },
                         ),
                         const SizedBox(height: 16),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: const SubtitleTextWidget(
-                              label: "Forgot Password?",
-                              textDecoration: TextDecoration.underline,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton.icon(
                             icon: const Icon(Icons.login),
-                            label: Text("Login"),
+                            label: Text("Sign Up"),
                             onPressed: () async {
-                              await _loginFct();
+                              await _registerFct();
                             },
                           ),
                         ),
@@ -146,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: ElevatedButton(
                                 child: Text("Guest?"),
                                 onPressed: () async {
-                                  await _loginFct();
+                                  await _registerFct();
                                 },
                               ),
                             ),
@@ -159,10 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 label: "Don't have an account?",
                               ),
                               TextButton(
-                                onPressed: () async {
-                                  await Navigator.of(context)
-                                      .pushNamed(RegisterScreen.routeName);
-                                },
+                                onPressed: () {},
                                 child: const SubtitleTextWidget(
                                   label: "Sign up",
                                   textDecoration: TextDecoration.underline,
@@ -173,8 +200,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ]),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
 
 import 'consts/theme_data.dart';
+import 'screens/auth/register_screen.dart';
 import 'screens/inner_screens/product_details_screen.dart';
 
 void main() {
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
           // home: const RootScreen(),
           home: const LoginScreen(),
+          // home: const RegisterScreen(),
           routes: {
             ProductDetailsScreen.routeName: (context) =>
                 const ProductDetailsScreen(),
             WishlistScreen.routeName: (context) => const WishlistScreen(),
             ViewedRecentlyScreen.routeName: (context) =>
                 const ViewedRecentlyScreen(),
+            RegisterScreen.routeName: (context) => const RegisterScreen(),
           },
         );
       }),
