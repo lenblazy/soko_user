@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/providers/theme_provider.dart';
 import 'package:soko_user/root_screen.dart';
+import 'package:soko_user/screens/auth/forgot_password.dart';
 import 'package:soko_user/screens/auth/login_screen.dart';
 import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
@@ -44,6 +45,8 @@ class MyApp extends StatelessWidget {
             RootScreen.routeName: (context) => const RootScreen(),
             LoginScreen.routeName: (context) => const LoginScreen(),
             OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
+            ForgotPasswordScreen.routeName: (context) =>
+                const ForgotPasswordScreen(),
           },
         );
       }),
