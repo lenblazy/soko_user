@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/consts/app_constants.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
+import 'package:soko_user/widgets/products/latest_arrival.dart';
+import 'package:soko_user/widgets/title_text.dart';
 
 import '../consts/app_colors.dart';
 import '../providers/theme_provider.dart';
@@ -26,6 +28,7 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 15),
             SizedBox(
@@ -45,6 +48,17 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const TitleTextWidget(label: "Latest Arrival"),
+            const SizedBox(height: 15),
+            SizedBox(
+              height: size.height * 0.2,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) => LatestArrivalProductWidget(),
               ),
             ),
           ],
