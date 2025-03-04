@@ -69,22 +69,15 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 4,
-                children: [
-                  const CtgRoundedWidget(
-                      image: AssetManager.mobiles, name: "Phones"),
-                  const CtgRoundedWidget(
-                      image: AssetManager.mobiles, name: "Phones"),
-                  const CtgRoundedWidget(
-                      image: AssetManager.mobiles, name: "Phones"),
-                  const CtgRoundedWidget(
-                      image: AssetManager.mobiles, name: "Phones"),
-                  const CtgRoundedWidget(
-                      image: AssetManager.mobiles, name: "Phones"),
-                  const CtgRoundedWidget(
-                      image: AssetManager.mobiles, name: "Phones"),
-
-                ],
-              )
+                children: List.generate(
+                  AppConstants.categoriesList.length,
+                  (index) {
+                    final category = AppConstants.categoriesList[index];
+                    return CtgRoundedWidget(
+                        image: category.image, name: category.name);
+                  },
+                ),
+              ),
             ],
           ),
         ),
