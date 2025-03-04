@@ -1,7 +1,7 @@
-import 'dart:math';
-
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:soko_user/services/asset_manager.dart';
+import 'package:soko_user/widgets/products/product_widget.dart';
 
 import '../widgets/title_text.dart';
 
@@ -41,27 +41,38 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(children: [
-            TextField(
-              controller: controller,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      controller.clear();
-                    });
-                    FocusScope.of(context).unfocus();
+          child: Column(
+            children: [
+              TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        controller.clear();
+                      });
+                      FocusScope.of(context).unfocus();
+                    },
+                    child: Icon(Icons.clear),
+                  ),
+                ),
+                onSubmitted: (value) {
+                  debugPrint("Value of text $value");
+                  debugPrint("Value of conteoller text ${controller.text}");
+                },
+              ),
+              Expanded(
+                child: DynamicHeightGridView(
+                  builder: (context, index) {
+                    return ProductWidget();
                   },
-                  child: Icon(Icons.clear),
+                  itemCount: 200,
+                  crossAxisCount: 2,
                 ),
               ),
-              onSubmitted: (value) {
-                debugPrint("Value of text $value");
-                debugPrint("Value of conteoller text ${controller.text}");
-              },
-            ),
-          ]),
+            ],
+          ),
         ),
       ),
     );
