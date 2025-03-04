@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/consts/validator.dart';
 import 'package:soko_user/root_screen.dart';
+import 'package:soko_user/screens/auth/forgot_password.dart';
 import 'package:soko_user/screens/auth/register_screen.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/auth/google_btn.dart';
@@ -109,7 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () async => await Navigator.of(context)
+                                .pushNamed(ForgotPasswordScreen.routeName),
                             child: const SubtitleTextWidget(
                               label: "Forgot Password?",
                               textDecoration: TextDecoration.underline,
