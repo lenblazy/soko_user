@@ -1,8 +1,12 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:soko_user/consts/app_constants.dart';
+import 'package:soko_user/widgets/app_name_text.dart';
 
 import '../consts/app_colors.dart';
 import '../providers/theme_provider.dart';
+import '../services/asset_manager.dart';
 import '../widgets/subtitle_text.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,24 +14,38 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(AssetManager.shoppingBasket),
+        ),
+        title: AppNameTextWidget(),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SubtitleTextWidget(label: "Hello world"),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Hello world"),
-            ),
-            SwitchListTile(
-              title: Text(
-                  themeProvider.getIsDarkTheme ? "Dark Mode" : "Light Mode"),
-              value: themeProvider.getIsDarkTheme,
-              onChanged: (value) {
-                themeProvider.setDarkTheme(value);
-              },
+            const SizedBox(height: 15),
+            SizedBox(
+              height: size.height * 0.25,
+              child: Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  return Image.asset(
+                    AppConstants.bannerImages[index],
+                    fit: BoxFit.fill,
+                  );
+                },
+                itemCount: AppConstants.bannerImages.length,
+                pagination: const SwiperPagination(
+                  // alignment: Alignment.bottomCenter,
+                  builder: DotSwiperPaginationBuilder(
+                    activeColor: Colors.red,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
