@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:soko_user/screens/inner_screens/orders/orders_screen.dart';
 import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
 import 'package:soko_user/services/my_app_functions.dart';
@@ -87,7 +88,10 @@ class ProfileScreen extends StatelessWidget {
                 CustomListTile(
                   imagePath: AssetManager.orderSvg,
                   text: "All Order",
-                  function: () {},
+                  function: () async {
+                    await Navigator.of(context)
+                        .pushNamed(OrdersScreenFree.routeName);
+                  },
                 ),
                 CustomListTile(
                   imagePath: AssetManager.wishlistSvg,
