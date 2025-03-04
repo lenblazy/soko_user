@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/consts/validator.dart';
+import 'package:soko_user/root_screen.dart';
 import 'package:soko_user/screens/auth/register_screen.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/auth/google_btn.dart';
@@ -9,6 +10,7 @@ import 'package:soko_user/widgets/title_text.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  static const String routeName = "/loginScreen";
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -145,9 +147,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: kBottomNavigationBarHeight,
                               child: ElevatedButton(
                                 child: Text("Guest?"),
-                                onPressed: () async {
-                                  await _loginFct();
-                                },
+                                onPressed: () async =>
+                                    await Navigator.of(context)
+                                        .pushNamed(RootScreen.routeName),
                               ),
                             ),
                           ),

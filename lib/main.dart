@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/providers/theme_provider.dart';
+import 'package:soko_user/root_screen.dart';
 import 'package:soko_user/screens/auth/login_screen.dart';
 import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
 
 import 'consts/theme_data.dart';
 import 'screens/auth/register_screen.dart';
+import 'screens/inner_screens/orders/orders_screen.dart';
 import 'screens/inner_screens/product_details_screen.dart';
 
 void main() {
@@ -38,6 +40,9 @@ class MyApp extends StatelessWidget {
             ViewedRecentlyScreen.routeName: (context) =>
                 const ViewedRecentlyScreen(),
             RegisterScreen.routeName: (context) => const RegisterScreen(),
+            RootScreen.routeName: (context) => const RootScreen(),
+            LoginScreen.routeName: (context) => const LoginScreen(),
+            OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
           },
         );
       }),

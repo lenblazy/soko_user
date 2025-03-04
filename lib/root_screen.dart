@@ -8,6 +8,8 @@ import 'package:soko_user/screens/search_screen.dart';
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
 
+  static const String routeName = "/rootScreen";
+
   @override
   State<RootScreen> createState() => _RootScreenState();
 }
