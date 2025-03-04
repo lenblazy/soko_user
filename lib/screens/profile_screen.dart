@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
+import 'package:soko_user/services/my_app_functions.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/custom_list_tile.dart';
 import 'package:soko_user/widgets/title_text.dart';
@@ -131,9 +132,16 @@ class ProfileScreen extends StatelessWidget {
           ),
           Center(
             child: ElevatedButton.icon(
-              onPressed: () {},
               icon: const Icon(Icons.login),
               label: Text("Login"),
+              onPressed: () async {
+                await MyAppFunctions.showErrorOrWarningDialog(
+                  context: context,
+                  subtitle: "Are you sure you want to sign out?",
+                  fct: () {},
+                  isError: false,
+                );
+              },
             ),
           ),
         ],
