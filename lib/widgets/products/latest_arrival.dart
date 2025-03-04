@@ -4,7 +4,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 
 import '../../consts/app_constants.dart';
-import '../title_text.dart';
 
 class LatestArrivalProductWidget extends StatelessWidget {
   const LatestArrivalProductWidget({super.key});
