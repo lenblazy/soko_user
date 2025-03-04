@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:soko_user/consts/validator.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/auth/google_btn.dart';
+import 'package:soko_user/widgets/auth/image_picker_widget.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
   static const String routeName = "/registerScreen";
 
   @override
@@ -26,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _repeatPwdFocusNode;
 
   final _formKey = GlobalKey<FormState>();
+  XFile? _pickedImage;
 
   @override
   void initState() {
@@ -65,6 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -74,6 +79,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 60),
               const AppNameTextWidget(),
               const SizedBox(height: 16),
+              SizedBox(
+                height: size.width * 0.3,
+                width: size.width * 0.3,
+                child: PickImageWidget(
+                  pickedImage: _pickedImage,
+                  function: () {},
+                ),
+              ),
               Form(
                 key: _formKey,
                 child: Padding(
