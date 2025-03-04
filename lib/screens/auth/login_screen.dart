@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/consts/validator.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
+import 'package:soko_user/widgets/auth/google_btn.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
@@ -130,17 +131,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 16),
                         Row(children: [
-                          ElevatedButton(
-                            child: Text("Sign in with google?"),
-                            onPressed: () async {
-                              await _loginFct();
-                            },
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              height: kBottomNavigationBarHeight,
+                              child: GoogleBtn(),
+                            ),
                           ),
-                          ElevatedButton(
-                            child: Text("Guest login?"),
-                            onPressed: () async {
-                              await _loginFct();
-                            },
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: SizedBox(
+                              height: kBottomNavigationBarHeight,
+                              child: ElevatedButton(
+                                child: Text("Guest?"),
+                                onPressed: () async {
+                                  await _loginFct();
+                                },
+                              ),
+                            ),
                           ),
                         ]),
                         Row(
