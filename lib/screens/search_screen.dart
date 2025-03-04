@@ -43,15 +43,16 @@ class _SearchScreenState extends State<SearchScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              const SizedBox(height: 15),
               TextField(
                 controller: controller,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),
                   suffixIcon: GestureDetector(
                     onTap: () {
-                      setState(() {
+                      // setState(() {
                         controller.clear();
-                      });
+                      // });
                       FocusScope.of(context).unfocus();
                     },
                     child: Icon(Icons.clear),
@@ -62,8 +63,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   debugPrint("Value of conteoller text ${controller.text}");
                 },
               ),
+              const SizedBox(height: 15),
               Expanded(
                 child: DynamicHeightGridView(
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
                   builder: (context, index) {
                     return ProductWidget();
                   },
