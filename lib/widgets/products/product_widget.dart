@@ -19,8 +19,9 @@ class _ProductWidgetState extends State<ProductWidget> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+      onTap: () async {
+        await Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+        // Navigator.pushReplacementNamed(context, ProductDetailsScreen.routeName);
       },
       child: Column(
         children: [
