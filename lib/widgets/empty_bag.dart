@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
-import '../services/asset_manager.dart';
-
 class EmptyBagWidget extends StatelessWidget {
   const EmptyBagWidget({
     super.key,
@@ -49,7 +47,7 @@ class EmptyBagWidget extends StatelessWidget {
           ),
           onPressed: () {},
           child: Text(buttonText),
-        )
+        ),
       ],
     );
   }

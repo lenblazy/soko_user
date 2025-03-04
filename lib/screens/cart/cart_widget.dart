@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/consts/app_constants.dart';
 import 'package:soko_user/screens/cart/quantity_btm_sheet.dart';
+import 'package:soko_user/widgets/products/heart_btn.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
@@ -48,12 +49,8 @@ class CartWidget extends StatelessWidget {
                                 color: Colors.red,
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                IconlyLight.heart,
-                                color: Colors.red,
-                              ),
+                            HeartBtnWidget(
+                              bkgColor: Colors.red,
                             ),
                           ],
                         ),

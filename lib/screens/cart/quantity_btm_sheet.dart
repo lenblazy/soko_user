@@ -28,7 +28,7 @@ class QuantityBtmSheetWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: SubtitleTextWidget(
-                        label: "${index}",
+                        label: "$index",
                       ),
                     ),
                   ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 
-import '../services/asset_manager.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile(
