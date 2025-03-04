@@ -53,4 +53,54 @@ class MyAppFunctions {
           );
         });
   }
+
+  static Future<void> imagePickerDialog({
+    required BuildContext context,
+    bool isError = true,
+    required Function fctGallery,
+    required Function fctCamera,
+    required Function fctRemove,
+  }) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: Center(
+              child: TitleTextWidget(label: "Choose Option"),
+            ),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  TextButton.icon(
+                    onPressed: () {
+                      fctGallery();
+                      Navigator.canPop(context) ? Navigator.pop(context) : null;
+                    },
+                    label: const Text("Gallery"),
+                    icon: const Icon(Icons.image),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {
+                      fctCamera();
+                      Navigator.canPop(context) ? Navigator.pop(context) : null;
+                    },
+                    label: const Text("Camera"),
+                    icon: const Icon(Icons.camera_alt),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {
+                      fctRemove();
+                      Navigator.canPop(context) ? Navigator.pop(context) : null;
+                    },
+                    label: const Text("Remove"),
+                    icon: const Icon(Icons.remove_circle_outline),
+                  ),
+                ],
+              ),
+            ),
+          );
+          ;
+        });
+  }
 }
