@@ -12,4 +12,11 @@ class Validator {
     }
     return null;
   }
+
+  static String? nameValidator(String? value) {
+    if (value == null || value.isEmpty || value.length < 3) {
+      return "Name must be at least 3 characters";
+    }
+    return null;
+  }
 }
