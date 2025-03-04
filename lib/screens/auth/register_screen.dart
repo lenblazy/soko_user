@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:soko_user/consts/validator.dart';
+import 'package:soko_user/services/my_app_functions.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/auth/google_btn.dart';
 import 'package:soko_user/widgets/auth/image_picker_widget.dart';
@@ -84,7 +85,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: size.width * 0.3,
                 child: PickImageWidget(
                   pickedImage: _pickedImage,
-                  function: () {},
+                  function: () async {
+                    await MyAppFunctions.imagePickerDialog(
+                      context: context,
+                      fctGallery: () {},
+                      fctCamera: () {},
+                      fctRemove: () {},
+                    );
+                  },
                 ),
               ),
               Form(
