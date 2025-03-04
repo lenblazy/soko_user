@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/providers/theme_provider.dart';
-import 'package:soko_user/root_screen.dart';
+import 'package:soko_user/screens/auth/login_screen.dart';
 import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
 
@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
           title: 'Shop Smart',
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
-          home: const RootScreen(),
+          // home: const RootScreen(),
+          home: const LoginScreen(),
           routes: {
             ProductDetailsScreen.routeName: (context) =>
                 const ProductDetailsScreen(),
