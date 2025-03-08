@@ -76,7 +76,9 @@ class CartWidget extends StatelessWidget {
                                           .scaffoldBackgroundColor,
                                       context: context,
                                       builder: (context) {
-                                        return const QuantityBtmSheetWidget();
+                                        return QuantityBtmSheetWidget(
+                                          cartModel: cartModel,
+                                        );
                                       });
                                 },
                                 icon: Icon(IconlyLight.arrowDown2),

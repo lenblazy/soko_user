@@ -20,6 +20,20 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateQty({
+    required String productId,
+    required int qty,
+  }) {
+    _cartItems.update(
+        productId,
+        (cartItem) => CartModel(
+              productId: productId,
+              cardId: cartItem.cardId,
+              quantity: qty,
+            ));
+    notifyListeners();
+  }
+
   bool isProdInCart({required String productId}) {
     return _cartItems.containsKey(productId);
   }
@@ -33,7 +47,7 @@ class CartProvider with ChangeNotifier {
         total += double.parse(productPrice) * value.quantity;
       }
     });
-    return total.roundToDouble();
+    return total;
   }
 
   int getQty() {

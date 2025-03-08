@@ -35,7 +35,7 @@ class CartBottomSheetWidget extends StatelessWidget {
                     Flexible(
                       child: TitleTextWidget(
                         label:
-                            "Total (${cartProvider.getCartItems.length} products / ${cartProvider.getQty()} items)",
+                            "Total (${cartProvider.getCartItems.length} products / ${cartProvider.getQty().toStringAsFixed(2)} items)",
                       ),
                     ),
                     SubtitleTextWidget(
