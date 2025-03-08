@@ -31,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
+  List<ProductModel> productSearchList = [];
   @override
   Widget build(BuildContext context) {
     final productsProvider = Provider.of<ProductsProvider>(context);
@@ -59,6 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     TextField(
                       controller: controller,
                       decoration: InputDecoration(
+                        hintText: "Search",
                         prefixIcon: Icon(Icons.search),
                         suffixIcon: GestureDetector(
                           onTap: () {
@@ -70,23 +72,40 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Icon(Icons.clear),
                         ),
                       ),
+                      // onChanged: (value) {
+                      //   setState(() {
+                      //     productSearchList = productsProvider.searchQuery(
+                      //         queryText: controller.text);
+                      //   });
+                      // },
                       onSubmitted: (value) {
-                        debugPrint("Value of text $value");
-                        debugPrint(
-                            "Value of conteoller text ${controller.text}");
+                        setState(() {
+                          productSearchList = productsProvider.searchQuery(
+                              queryText: controller.text);
+                        });
                       },
                     ),
                     const SizedBox(height: 15),
+                    if (controller.text.isNotEmpty &&
+                        productSearchList.isEmpty) ...[
+                      Center(
+                        child: TitleTextWidget(label: "No products found"),
+                      )
+                    ],
                     Expanded(
                       child: DynamicHeightGridView(
                         mainAxisSpacing: 12,
                         crossAxisSpacing: 12,
                         builder: (context, index) {
                           return ProductWidget(
-                            productId: productList[index].productId,
+                            productId: controller.text.isNotEmpty
+                                ? productSearchList[index].productId
+                                : productList[index].productId,
                           );
                         },
-                        itemCount: productList.length,
+                        itemCount: controller.text.isNotEmpty
+                            ? productSearchList.length
+                            : productList.length,
                         crossAxisCount: 2,
                       ),
                     ),
