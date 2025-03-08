@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:soko_user/providers/cart_provider.dart';
 import 'package:soko_user/providers/products_provider.dart';
 import 'package:soko_user/screens/inner_screens/product_details_screen.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
@@ -26,6 +27,7 @@ class _ProductWidgetState extends State<ProductWidget> {
     // final productModel = Provider.of<ProductModel>(context);
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct = productsProvider.findByProdId(widget.productId);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     Size size = MediaQuery.of(context).size;
     return getCurrentProduct == null
@@ -82,13 +84,25 @@ class _ProductWidgetState extends State<ProductWidget> {
                         color: Colors.lightBlue,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(12.0),
-                          onTap: () {},
+                          onTap: () {
+                            if (cartProvider.isProdInCart(
+                                productId: getCurrentProduct.productId)) {
+                              return;
+                            }
+                            cartProvider.addToCart(
+                              productId: getCurrentProduct.productId,
+                            );
+                          },
                           splashColor: Colors.red,
                           child: Padding(
-                            padding: EdgeInsets.all(6.0),
+                            padding: const EdgeInsets.all(6.0),
                             child: Icon(
-                              Icons.add_shopping_cart_outlined,
+                              cartProvider.isProdInCart(
+                                      productId: getCurrentProduct.productId)
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_outlined,
                               size: 20,
+                              color: Colors.white,
                             ),
                           ),
                         ),
