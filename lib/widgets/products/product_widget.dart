@@ -8,7 +8,14 @@ import '../../consts/app_constants.dart';
 import '../title_text.dart';
 
 class ProductWidget extends StatefulWidget {
-  const ProductWidget({super.key});
+  const ProductWidget({
+    super.key,
+    this.image,
+    this.title,
+    this.price,
+  });
+
+  final String? image, title, price;
 
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -28,7 +35,7 @@ class _ProductWidgetState extends State<ProductWidget> {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: FancyShimmerImage(
-              imageUrl: AppConstants.imageUrl,
+              imageUrl: widget.image ?? AppConstants.imageUrl,
               height: size.height * 0.2,
               width: double.infinity,
             ),
@@ -40,7 +47,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 flex: 5,
                 child: TitleTextWidget(
                   maxLines: 2,
-                  label: "Title" * 10,
+                  label: widget.title ?? "Product Title",
                 ),
               ),
               IconButton(
@@ -53,10 +60,10 @@ class _ProductWidgetState extends State<ProductWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Flexible(
+              Flexible(
                 flex: 1,
                 child: SubtitleTextWidget(
-                  label: "1550.00\$",
+                  label: widget.price ?? "1550.00\$",
                   color: Colors.blue,
                 ),
               ),

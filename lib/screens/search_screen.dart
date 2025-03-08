@@ -1,5 +1,6 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:soko_user/models/products_model.dart';
 import 'package:soko_user/services/asset_manager.dart';
 import 'package:soko_user/widgets/products/product_widget.dart';
 
@@ -51,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       // setState(() {
-                        controller.clear();
+                      controller.clear();
                       // });
                       FocusScope.of(context).unfocus();
                     },
@@ -69,9 +70,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
                   builder: (context, index) {
-                    return ProductWidget();
+                    final product = ProductModel.products[index];
+                    return ProductWidget(
+                      image: product.productImage,
+                      title: product.productTitle,
+                      price: product.productPrice,
+                    );
                   },
-                  itemCount: 200,
+                  itemCount: ProductModel.products.length,
                   crossAxisCount: 2,
                 ),
               ),
