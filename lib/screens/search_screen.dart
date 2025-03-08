@@ -81,7 +81,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       onSubmitted: (value) {
                         setState(() {
                           productSearchList = productsProvider.searchQuery(
-                              queryText: controller.text);
+                            queryText: controller.text,
+                            passedList: productList,
+                          );
                         });
                       },
                     ),
