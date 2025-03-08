@@ -1,10 +1,11 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:soko_user/models/products_model.dart';
 import 'package:soko_user/screens/inner_screens/product_details_screen.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 
-import '../../consts/app_constants.dart';
 import '../title_text.dart';
 
 class ProductWidget extends StatefulWidget {
@@ -24,6 +25,7 @@ class ProductWidget extends StatefulWidget {
 class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
+    final productModel = Provider.of<ProductModel>(context);
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () async {
@@ -35,7 +37,7 @@ class _ProductWidgetState extends State<ProductWidget> {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: FancyShimmerImage(
-              imageUrl: widget.image ?? AppConstants.imageUrl,
+              imageUrl: productModel.productImage,
               height: size.height * 0.2,
               width: double.infinity,
             ),
@@ -47,7 +49,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 flex: 5,
                 child: TitleTextWidget(
                   maxLines: 2,
-                  label: widget.title ?? "Product Title",
+                  label: productModel.productTitle,
                 ),
               ),
               IconButton(
@@ -63,7 +65,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               Flexible(
                 flex: 1,
                 child: SubtitleTextWidget(
-                  label: widget.price ?? "1550.00\$",
+                  label: productModel.productPrice,
                   color: Colors.blue,
                 ),
               ),

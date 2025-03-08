@@ -1,9 +1,10 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
-import 'package:soko_user/models/products_model.dart';
+import 'package:provider/provider.dart';
 import 'package:soko_user/services/asset_manager.dart';
 import 'package:soko_user/widgets/products/product_widget.dart';
 
+import '../providers/products_provider.dart';
 import '../widgets/title_text.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -70,14 +72,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
                   builder: (context, index) {
-                    final product = ProductModel.products[index];
-                    return ProductWidget(
-                      image: product.productImage,
-                      title: product.productTitle,
-                      price: product.productPrice,
-                    );
+                    return ChangeNotifierProvider.value(
+                        value: productsProvider.getProducts[index],
+                        child: const ProductWidget());
                   },
-                  itemCount: ProductModel.products.length,
+                  itemCount: productsProvider.getProducts.length,
                   crossAxisCount: 2,
                 ),
               ),
