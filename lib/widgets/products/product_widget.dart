@@ -33,7 +33,10 @@ class _ProductWidgetState extends State<ProductWidget> {
         : GestureDetector(
             onTap: () async {
               await Navigator.pushNamed(
-                  context, ProductDetailsScreen.routeName);
+                context,
+                ProductDetailsScreen.routeName,
+                arguments: getCurrentProduct.productId,
+              );
               // Navigator.pushReplacementNamed(context, ProductDetailsScreen.routeName);
             },
             child: Column(
