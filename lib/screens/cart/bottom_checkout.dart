@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:soko_user/providers/cart_provider.dart';
+import 'package:soko_user/providers/products_provider.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
@@ -7,6 +10,8 @@ class CartBottomSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -29,11 +34,13 @@ class CartBottomSheetWidget extends StatelessWidget {
                   children: [
                     Flexible(
                       child: TitleTextWidget(
-                        label: "Total (6 products / 9 items)",
+                        label:
+                            "Total (${cartProvider.getCartItems.length} products / ${cartProvider.getQty()} items)",
                       ),
                     ),
                     SubtitleTextWidget(
-                      label: "16.0 \$",
+                      label:
+                          "${cartProvider.getTotal(productsProvider: productsProvider)} \$",
                       color: Colors.blue,
                     ),
                   ],

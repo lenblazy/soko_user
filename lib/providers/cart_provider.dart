@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:soko_user/models/cart_model.dart';
+import 'package:soko_user/providers/products_provider.dart';
 import 'package:uuid/uuid.dart';
 
 class CartProvider with ChangeNotifier {
@@ -21,5 +22,25 @@ class CartProvider with ChangeNotifier {
 
   bool isProdInCart({required String productId}) {
     return _cartItems.containsKey(productId);
+  }
+
+  double getTotal({required ProductsProvider productsProvider}) {
+    double total = 0;
+    _cartItems.forEach((key, value) {
+      final productPrice =
+          productsProvider.findByProdId(value.productId)?.productPrice;
+      if (productPrice != null) {
+        total += double.parse(productPrice) * value.quantity;
+      }
+    });
+    return total.roundToDouble();
+  }
+
+  int getQty() {
+    int total = 0;
+    _cartItems.forEach((key, value) {
+      total += value.quantity;
+    });
+    return total;
   }
 }
