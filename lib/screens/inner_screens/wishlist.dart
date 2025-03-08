@@ -1,8 +1,11 @@
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:soko_user/screens/cart/bottom_checkout.dart';
 import 'package:soko_user/services/asset_manager.dart';
 import 'package:soko_user/widgets/empty_bag.dart';
 import 'package:soko_user/widgets/title_text.dart';
+
+import '../../widgets/products/product_widget.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -36,11 +39,16 @@ class WishlistScreen extends StatelessWidget {
               ],
             ),
             bottomSheet: CartBottomSheetWidget(),
-            body: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return const Center();
+            body: DynamicHeightGridView(
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              builder: (context, index) {
+                return ProductWidget(
+                  productId: '',
+                );
               },
+              itemCount: 200,
+              crossAxisCount: 2,
             ),
           );
   }
