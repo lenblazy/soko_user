@@ -7,6 +7,7 @@ import 'package:soko_user/screens/auth/forgot_password.dart';
 import 'package:soko_user/screens/auth/login_screen.dart';
 import 'package:soko_user/screens/inner_screens/view_recently.dart';
 import 'package:soko_user/screens/inner_screens/wishlist.dart';
+import 'package:soko_user/screens/search_screen.dart';
 
 import 'consts/theme_data.dart';
 import 'screens/auth/register_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
             RootScreen.routeName: (context) => const RootScreen(),
             LoginScreen.routeName: (context) => const LoginScreen(),
             OrdersScreenFree.routeName: (context) => const OrdersScreenFree(),
+            SearchScreen.routeName: (context) => const SearchScreen(),
             ForgotPasswordScreen.routeName: (context) =>
                 const ForgotPasswordScreen(),
           },
