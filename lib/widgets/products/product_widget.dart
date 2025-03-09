@@ -1,10 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/providers/cart_provider.dart';
 import 'package:soko_user/providers/products_provider.dart';
 import 'package:soko_user/screens/inner_screens/product_details_screen.dart';
+import 'package:soko_user/widgets/products/heart_btn.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
 
 import '../title_text.dart';
@@ -61,10 +61,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                         label: getCurrentProduct.productTitle,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(IconlyLight.heart),
-                    ),
+                    HeartBtnWidget(productId: getCurrentProduct.productId),
                   ],
                 ),
                 SizedBox(height: 10),

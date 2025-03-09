@@ -53,7 +53,9 @@ class LatestArrivalProductWidget extends StatelessWidget {
                     FittedBox(
                       child: Row(
                         children: [
-                          const HeartBtnWidget(),
+                          HeartBtnWidget(
+                            productId: productModel.productId,
+                          ),
                           IconButton(
                             onPressed: () {
                               if (cartProvider.isProdInCart(

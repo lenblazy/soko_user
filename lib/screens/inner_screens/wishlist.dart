@@ -1,7 +1,10 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:soko_user/providers/wishlist_provider.dart';
 import 'package:soko_user/screens/cart/bottom_checkout.dart';
 import 'package:soko_user/services/asset_manager.dart';
+import 'package:soko_user/services/my_app_functions.dart';
 import 'package:soko_user/widgets/empty_bag.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
@@ -14,7 +17,8 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isEmpty
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    return wishlistProvider.getWishlistItems.isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
               imagePath: AssetManager.bagWish,
@@ -30,10 +34,21 @@ class WishlistScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(AssetManager.shoppingBasket),
               ),
-              title: const TitleTextWidget(label: "Wishlist (6)"),
+              title: TitleTextWidget(
+                label: "Wishlist (${wishlistProvider.getWishlistItems.length})",
+              ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    MyAppFunctions.showErrorOrWarningDialog(
+                      isError: false,
+                      context: context,
+                      subtitle: "Clear Wishlist?",
+                      fct: () {
+                        wishlistProvider.clearLocalWishlist();
+                      },
+                    );
+                  },
                   icon: const Icon(Icons.delete),
                 ),
               ],
@@ -44,10 +59,12 @@ class WishlistScreen extends StatelessWidget {
               crossAxisSpacing: 12,
               builder: (context, index) {
                 return ProductWidget(
-                  productId: '',
+                  productId: wishlistProvider.getWishlistItems.values
+                      .toList()[index]
+                      .productId,
                 );
               },
-              itemCount: 200,
+              itemCount: wishlistProvider.getWishlistItems.length,
               crossAxisCount: 2,
             ),
           );
