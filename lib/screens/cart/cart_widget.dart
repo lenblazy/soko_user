@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/models/cart_model.dart';
+import 'package:soko_user/providers/cart_provider.dart';
 import 'package:soko_user/providers/products_provider.dart';
 import 'package:soko_user/screens/cart/quantity_btm_sheet.dart';
 import 'package:soko_user/widgets/products/heart_btn.dart';
@@ -15,6 +16,7 @@ class CartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartModel = Provider.of<CartModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct =
         productsProvider.findByProdId(cartModel.productId);
@@ -51,7 +53,11 @@ class CartWidget extends StatelessWidget {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      cartProvider.removeOneItem(
+                                        productId: getCurrentProduct.productId,
+                                      );
+                                    },
                                     icon: const Icon(
                                       Icons.clear,
                                       color: Colors.red,

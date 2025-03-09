@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soko_user/providers/cart_provider.dart';
 import 'package:soko_user/screens/cart/bottom_checkout.dart';
 import 'package:soko_user/services/asset_manager.dart';
+import 'package:soko_user/services/my_app_functions.dart';
 import 'package:soko_user/widgets/empty_bag.dart';
 import 'package:soko_user/widgets/title_text.dart';
 
@@ -37,7 +38,16 @@ class CartScreen extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    MyAppFunctions.showErrorOrWarningDialog(
+                      isError: false,
+                      context: context,
+                      subtitle: "Clear Cart?",
+                      fct: () {
+                        cartProvider.clearLocalCart();
+                      },
+                    );
+                  },
                   icon: const Icon(Icons.delete),
                 ),
               ],
