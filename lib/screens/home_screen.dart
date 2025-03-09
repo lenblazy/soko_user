@@ -1,6 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:soko_user/consts/app_constants.dart';
+import 'package:soko_user/providers/products_provider.dart';
 import 'package:soko_user/widgets/app_name_text.dart';
 import 'package:soko_user/widgets/products/ctg_rounded_widget.dart';
 import 'package:soko_user/widgets/products/latest_arrival.dart';
@@ -14,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productsProvider = Provider.of<ProductsProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -57,7 +60,10 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 10,
-                  itemBuilder: (context, index) => LatestArrivalProductWidget(),
+                  itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                    value: productsProvider.getProducts[index],
+                    child: const LatestArrivalProductWidget(),
+                  ),
                 ),
               ),
               const TitleTextWidget(label: "Categories"),
