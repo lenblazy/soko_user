@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soko_user/providers/cart_provider.dart';
 import 'package:soko_user/providers/products_provider.dart';
+import 'package:soko_user/providers/viewed_recently_provider.dart';
 import 'package:soko_user/screens/inner_screens/product_details_screen.dart';
 import 'package:soko_user/widgets/products/heart_btn.dart';
 import 'package:soko_user/widgets/subtitle_text.dart';
@@ -28,12 +29,16 @@ class _ProductWidgetState extends State<ProductWidget> {
     final productsProvider = Provider.of<ProductsProvider>(context);
     final getCurrentProduct = productsProvider.findByProdId(widget.productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewedRecentlyProvider = Provider.of<ViewedRecentlyProvider>(context);
 
     Size size = MediaQuery.of(context).size;
     return getCurrentProduct == null
         ? SizedBox.shrink()
         : GestureDetector(
             onTap: () async {
+              viewedRecentlyProvider.addToViewedRecently(
+                productId: getCurrentProduct.productId,
+              );
               await Navigator.pushNamed(
                 context,
                 ProductDetailsScreen.routeName,

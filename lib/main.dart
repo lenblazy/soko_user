@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soko_user/providers/cart_provider.dart';
 import 'package:soko_user/providers/products_provider.dart';
 import 'package:soko_user/providers/theme_provider.dart';
+import 'package:soko_user/providers/viewed_recently_provider.dart';
 import 'package:soko_user/providers/wishlist_provider.dart';
 import 'package:soko_user/root_screen.dart';
 import 'package:soko_user/screens/auth/forgot_password.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductsProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => WishlistProvider()),
+        ChangeNotifierProvider(create: (_) => ViewedRecentlyProvider()),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(

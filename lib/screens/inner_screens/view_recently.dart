@@ -1,6 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
-import 'package:soko_user/screens/cart/bottom_checkout.dart';
+import 'package:provider/provider.dart';
+import 'package:soko_user/providers/viewed_recently_provider.dart';
 import 'package:soko_user/services/asset_manager.dart';
 import 'package:soko_user/widgets/empty_bag.dart';
 import 'package:soko_user/widgets/products/product_widget.dart';
@@ -14,7 +15,8 @@ class ViewedRecentlyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isEmpty
+    final viewedRecentlyProvider = Provider.of<ViewedRecentlyProvider>(context);
+    return viewedRecentlyProvider.getViewedRecentlyItems.isEmpty
         ? Scaffold(
             body: EmptyBagWidget(
               imagePath: AssetManager.orderBag,
@@ -30,25 +32,27 @@ class ViewedRecentlyScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(AssetManager.shoppingBasket),
               ),
-              title: const TitleTextWidget(label: "Viewed recently (6)"),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.delete),
-                ),
-              ],
+              title: TitleTextWidget(
+                label:
+                    "Viewed recently (${viewedRecentlyProvider.getViewedRecentlyItems.length})",
+              ),
             ),
-            bottomSheet: CartBottomSheetWidget(),
-            body: DynamicHeightGridView(
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              builder: (context, index) {
-                return ProductWidget(
-                  productId: '',
-                );
-              },
-              itemCount: 200,
-              crossAxisCount: 2,
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DynamicHeightGridView(
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                builder: (context, index) {
+                  return ProductWidget(
+                    productId: viewedRecentlyProvider
+                        .getViewedRecentlyItems.values
+                        .toList()[index]
+                        .productId,
+                  );
+                },
+                itemCount: viewedRecentlyProvider.getViewedRecentlyItems.length,
+                crossAxisCount: 2,
+              ),
             ),
           );
   }
